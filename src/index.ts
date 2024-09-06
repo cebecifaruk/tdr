@@ -1,32 +1,34 @@
 // File: src/index.ts
 import process from "process";
-import * as todo from "./todo";
+import TodoService from "./TodoService";
 
 // Get command line arguments
 const [program, script, subcommand, ...args] = process.argv;
 
+const todoService = new TodoService();
+
 switch (subcommand) {
   case "add": {
     const [title, description] = args;
-    todo.addTodo(title, description);
+    todoService.addTodo(title, description);
   }
   case "list": {
-    todo.listTodos();
+    todoService.listTodos();
     break;
   }
   case "done": {
     const [id] = args;
-    todo.markTodoAsDone(id);
+    todoService.markTodoAsDone(id);
     break;
   }
   case "undone": {
     const [id] = args;
-    todo.markTodoAsUndone(id);
+    todoService.markTodoAsUndone(id);
     break;
   }
   case "delete": {
     const [id] = args;
-    todo.deleteTodo(id);
+    todoService.deleteTodo(id);
     break;
   }
   default:
